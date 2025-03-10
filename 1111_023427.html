@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>充电服务</title>
+</head>
+<body>
+    <h1>选择操作</h1>
+    <button onclick="selectCharge()">充电</button>
+    <button onclick="viewHistory()">历史订单</button>
+
+    <div id="charge-options" style="display: none;">
+        <h2>选择充电价位</h2>
+        <button onclick="selectPrice(1)">1元/小时</button>
+        <button onclick="selectPrice(2)">2元/小时</button>
+        <button onclick="selectPrice(3)">3元/小时</button>
+    </div>
+
+    <div id="history-orders" style="display: none;">
+        <h2>历史订单</h2>
+        <!-- 这里可以使用AJAX请求服务器获取历史订单数据并显示 -->
+    </div>
+
+    <script>
+        function selectCharge() {
+            document.getElementById('charge-options').style.display = 'block';
+            document.getElementById('history-orders').style.display = 'none';
+        }
+
+        function viewHistory() {
+            document.getElementById('history-orders').style.display = 'block';
+            document.getElementById('charge-options').style.display = 'none';
+            // 发送请求获取历史订单数据
+            // 示例：fetch('/history')
+        }
+
+        function selectPrice(price) {
+            // 发送请求到服务器，告知选择的充电价位
+            fetch(`/charge?price=${price}`)
+               .then(response => response.text())
+               .then(data => console.log(data));
+        }
+    </script>
+</body>
+</html>
